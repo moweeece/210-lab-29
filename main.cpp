@@ -11,6 +11,7 @@ using namespace std;
 
 // function declarations
 // simulation function
+// ramdom item generator
 
 
 // main function
@@ -33,4 +34,20 @@ int main() {
 
 // function definitions
 // simulation function
+    // for 25 time periods
     // randomly assign tasks to each robot
+    // switch statements including logic for each task
+        // picking
+            // call a random item generator function to assign an item to the task the robot is doing
+            // display the robot ID, task, and item
+        // packing
+            // call a random item generator function to assign an item to the task the robot is doing
+            // display the robot ID, task, and item
+        // charging
+            // display the robot ID and that its charging
+
+
+// random item generator
+    // open another file caled items.txt that contains random items
+    // calculate a random number and select that item from the txt file
+    // return the random item to the simulate function
