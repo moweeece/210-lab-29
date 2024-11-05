@@ -2,32 +2,52 @@
 // IDE Used: Visual Studio Code & Github
 
 //include necessary headers 
+#include <iostream>
 #include <fstream>
 #include <map>
 #include <cstdlib>
 #include <ctime>
+#include <string>
 using namespace std;
 
 
 // function declarations
 // simulation function
+void simulateRobotTasks();
 // ramdom item generator
 
 
 // main function
 int main() {
     // seed random number generator
+    srand(time(0));
+
     // variable declarations
     // initialize a robot map
+    map<int, string> robotTasks;
 
     // open external file
-    // randomly read robot IDs from file and assign to robot std::map
+    ifstream fin("robots.txt");
+
+    // read robot IDs from file and assign to robot std::map
+    int robotID;
+    while (fin >> robotID) {
+        robotTasks[robotID];
+    }
+
     // initialize robot task list
+
     // close the file
+    fin.close();
 
     // call function to simulate robot tasks over a certain time period
+    simulateRobotTasks();
 
     // display final state of robots
+    cout << "Final State of Robots:\n";
+    for (const auto& [id, task] : robotTasks) {
+        cout << "Robot ID: " << id << ", Task: " << task << endl;
+    }
 
     return 0;
 }
