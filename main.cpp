@@ -17,9 +17,9 @@ int NUM_ROBOTS = 5;
 int SIM_PERIODS = 25;
 // simulation function
 void simulateRobotTasks(map<int, string> &robotMap, const vector<string> &taskList);
-void selectRandomTask();
+string selectRandomTask(const vector<string> &taskList);
 // ramdom item generator
-void selectRandomItem();
+string selectRandomItem();
 
 
 // main function
@@ -70,7 +70,7 @@ void simulateRobotTasks(map<int, string> &robotMap, const vector<string> &taskLi
         for (auto &robot : robotMap) 
         {
             int robotID = robot.first;  // update ID # in the map
-            string task = selectRandomTask();
+            string task = selectRandomTask(taskList);
         }
 
         // switch statements including logic for each task
@@ -107,8 +107,36 @@ void simulateRobotTasks(map<int, string> &robotMap, const vector<string> &taskLi
   
 }
     
+string selectRandomTask(const vector<string> &taskList)
+{
+    // generate a random number from however big the taskList is
+    int randomNumTask = rand() % taskList.size();
+
+    // return that string task
+    return taskList[randomNumTask];
+}
 
 // random item generator
+string selectRandomItem()
+{
     // open another file caled items.txt that contains random items
+    // open external file
+    ifstream fin("items.txt");
+
+    // initialize robot task list
+    vector<string> itemList;
+    string item;
+    while (fin >> item) {
+        itemList.push_back(item);
+    }
+
+    // close the file
+    fin.close();
+
     // calculate a random number and select that item from the txt file
+    int randomNumItem = rand() % itemList.size();
+
     // return the random item to the simulate function
+    return itemList[randomNumItem];
+}
+    
