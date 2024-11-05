@@ -13,9 +13,10 @@ using namespace std;
 
 
 // function declarations
-int NUM_ROBOTS = 10;
+int NUM_ROBOTS = 5;
+int SIM_PERIODS = 25;
 // simulation function
-void simulateRobotTasks();
+void simulateRobotTasks(map<int, string> &robotMap, const vector<string> &taskList);
 // ramdom item generator
 
 
@@ -26,43 +27,42 @@ int main() {
 
     // variable declarations
     // initialize a robot map
-    map<int, string> robotTasks;
+    map<int, string> robotMap;
 
     // open external file
-    ifstream fin("robots.txt");
-
-    // read robot IDs from file and assign to robot std::map
-    int robotID;
-    while (fin >> robotID) {
-        robotTasks[robotID];
-    }
+    ifstream fin("tasks.txt");
 
     // initialize robot task list
     vector<string> taskList;
-    string robotTask;
-    while (fin >> robotTask) {
-        taskList.push_back(robotTask);
+    string task;
+    while (fin >> task) {
+        taskList.push_back(task);
     }
 
     // close the file
     fin.close();
 
     // call function to simulate robot tasks over a certain time period
-    simulateRobotTasks();
+    simulateRobotTasks(robotMap, taskList);
 
     // display final state of robots
     cout << "Final State of Robots:\n";
-    for (const auto& [id, task] : robotTasks) {
-        cout << "Robot ID: " << id << ", Task: " << task << endl;
-    }
+    
 
     return 0;
 }
 
 // function definitions
 // simulation function
+void simulateRobotTasks(map<int, string> &robotMap, const vector<string> &taskList)
+{
     // for 25 time periods
     // randomly assign tasks to each robot
+    for(int i = 1; i <= NUM_ROBOTS; i++)
+    {
+        robotMap[i] = ""; // initially empty
+    }
+
     // switch statements including logic for each task
         // picking
             // call a random item generator function to assign an item to the task the robot is doing
@@ -73,6 +73,8 @@ int main() {
         // charging
             // display the robot ID and that its charging
 
+}
+    
 
 // random item generator
     // open another file caled items.txt that contains random items
