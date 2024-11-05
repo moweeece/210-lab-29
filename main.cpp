@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <vector>
 #include <cstdlib>
 #include <ctime>
 #include <string>
@@ -12,6 +13,7 @@ using namespace std;
 
 
 // function declarations
+int NUM_ROBOTS = 10;
 // simulation function
 void simulateRobotTasks();
 // ramdom item generator
@@ -36,6 +38,11 @@ int main() {
     }
 
     // initialize robot task list
+    vector<string> taskList;
+    string robotTask;
+    while (fin >> robotTask) {
+        taskList.push_back(robotTask);
+    }
 
     // close the file
     fin.close();
