@@ -17,7 +17,7 @@ int main() {
 
     vector<string> tasks = {"picking", "packing", "charging"};
     for (int i = 0; i < 10; i++) {
-        cout << "Random Task: " << selectRandomTask(tasks) << endl;
+        cout << "Iteration " << i << ", Random Task: " << selectRandomTask(tasks) << endl;
     }
 
     return 0;
