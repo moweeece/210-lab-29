@@ -49,7 +49,10 @@ int main() {
 
     // display final state of robots
     cout << "Final State of Robots:\n";
-    
+    for (const auto &robot : robotMap)
+    {
+        cout << "Robot: " << robot.first << " final task: " << robot.second << endl;
+    }
 
     return 0;
 }
@@ -71,40 +74,37 @@ void simulateRobotTasks(map<int, string> &robotMap, const vector<string> &taskLi
         {
             int robotID = robot.first;  // update ID # in the map
             string task = selectRandomTask(taskList);
-        }
 
-        // switch statements including logic for each task
-        // picking
-        if (task == "picking")
-        {
-            // call a random item generator function to assign an item to the task the robot is doing
-            string item = selectRandomItem();
-            // display the robot ID, task, and item
-            cout << "Robot " << robotID << " is picking: " << item << endl;
-        }
+            // switch statements including logic for each task
+            // picking
+            if (task == "picking")
+            {
+                // call a random item generator function to assign an item to the task the robot is doing
+                string item = selectRandomItem();
+                // display the robot ID, task, and item
+                cout << "Robot " << robotID << " is picking: " << item << endl;
+            }
 
-        // packing
-        else if (task == "packing")
-        {
-            // call a random item generator function to assign an item to the task the robot is doing
-            string item = selectRandomItem();
-            // display the robot ID, task, and item
-            cout << "Robot " << robotID << " is packing: " << item << endl;
-        }
-    
-        // charging
-        else if (task == "charging")
-        {
-            // display the robot ID and that its charging
-            cout << "Robot " << robotID << " is charging." << endl;
+            // packing
+            else if (task == "packing")
+            {
+                // call a random item generator function to assign an item to the task the robot is doing
+                string item = selectRandomItem();
+                // display the robot ID, task, and item
+                cout << "Robot " << robotID << " is packing: " << item << endl;
+            }
+        
+            // charging
+            else if (task == "charging")
+            {
+                // display the robot ID and that its charging
+                cout << "Robot " << robotID << " is charging." << endl;
 
-        }
+            }
 
-        robot.second = task; // update the task in the map
-            
+            robot.second = task; // update the task in the map
+        }     
     }
-
-  
 }
     
 string selectRandomTask(const vector<string> &taskList)

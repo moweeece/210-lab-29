@@ -1,0 +1,24 @@
+Testing for selectRandomTask
+
+This test would verify that the selectRandomTask function always returns a valid task from a predefined list (which I know is the same as the tasks.txt contents)
+The test calls the selectRandomTask function for a certain number of iterations to check if the returned task is actually found in the list
+Another test case will be an empty list file to check if an empty string is returned
+
+Driver Code:
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+string selectRandomTask(const vector<string> &taskList);
+
+int main() {
+
+    vector<string> tasks = {"picking", "packing", "charging"};
+    for (int i = 0; i < 10; i++) {
+        cout << "Random Task: " << selectRandomTask(tasks) << endl;
+    }
+
+    return 0;
+}
