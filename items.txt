@@ -1,0 +1,10 @@
+Box
+Wrench
+Screwdriver
+Tape
+Phone
+Sprocket
+Belt
+Button
+Bearing
+Ruler
