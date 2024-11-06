@@ -1,0 +1,24 @@
+Bug #1: Task always set to "picking" during random task selection
+
+Bug #2: Program crashed when opening an empty file.
+    Corrected by adding a data validation check if the file is empty or not
+
+Bug #3: Vector and Map was not passing to functions correctly.
+    Corrected argument syntax to properly pass the arguments
+
+Bug #4: Robot IDs were not outputting sequentially
+
+Bug #5: Output did not have clarity as to time intervals
+    Corrected output syntax and logic to provide a more clear visual of time intervals and the status of each robot
+
+Bug #6: Robots did not perform tasks after each simulation ended
+    Corrected nested for loop logic 
+
+Bug #7: RobotID and task variables were not declared in scope of simulateRobotTasks function
+    Corrected by moving the switch logic and assignments into the nested for loop
+
+Bug #8:
+
+Bug #9:
+
+Bug #10:

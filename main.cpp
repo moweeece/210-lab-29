@@ -32,17 +32,23 @@ int main() {
     map<int, string> robotMap;
 
     // open external file
-    ifstream fin("tasks.txt");
+    ifstream finFileOne("tasks.txt");
+
+    // adding data validation to check if there is an error opening the file
+    if (!finFileOne) {
+        cerr << "Error opening the first file." << endl;
+        return 1;
+    }
 
     // initialize robot task list
     vector<string> taskList;
     string task;
-    while (fin >> task) {
+    while (finFileOne >> task) {
         taskList.push_back(task);
     }
 
     // close the file
-    fin.close();
+    finFileOne.close();
 
     // call function to simulate robot tasks over a certain time period
     simulateRobotTasks(robotMap, taskList);
@@ -121,22 +127,37 @@ string selectRandomItem()
 {
     // open another file caled items.txt that contains random items
     // open external file
-    ifstream fin("items.txt");
+    ifstream finFileTwo("items.txt");
+
+    // adding data validation to check if there is an error opening the file
+    if (!finFileTwo) {
+        cerr << "Error opening the second file." << endl;
+        return "";
+    }
 
     // initialize robot task list
     vector<string> itemList;
     string item;
-    while (fin >> item) {
+    while (finFileTwo >> item) {
         itemList.push_back(item);
     }
 
     // close the file
-    fin.close();
+    finFileTwo.close();
 
-    // calculate a random number and select that item from the txt file
-    int randomNumItem = rand() % itemList.size();
+    if (itemList.empty())
+    {
+        return "";
+    }
 
-    // return the random item to the simulate function
-    return itemList[randomNumItem];
+    else 
+    {
+        // calculate a random number and select that item from the txt file
+        int randomNumItem = rand() % itemList.size();
+
+        // return the random item to the simulate function
+        return itemList[randomNumItem];
+    }
+    
 }
     
