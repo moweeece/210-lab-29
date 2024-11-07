@@ -14,7 +14,7 @@ using namespace std;
 
 // function declarations
 int NUM_ROBOTS = 5;
-int SIM_PERIODS = 25;
+int SIM_PERIODS = 5;
 // simulation function
 void simulateRobotTasks(map<int, string> &robotMap, const vector<string> &taskList);
 string selectRandomTask(const vector<string> &taskList);
@@ -76,6 +76,7 @@ void simulateRobotTasks(map<int, string> &robotMap, const vector<string> &taskLi
     // for 25 time periods
     for (int t = 1; t <= SIM_PERIODS; t++)
     {
+        cout << "Time Period: " << t << endl;
         for (auto &robot : robotMap) 
         {
             int robotID = robot.first;  // update ID # in the map
@@ -115,11 +116,19 @@ void simulateRobotTasks(map<int, string> &robotMap, const vector<string> &taskLi
     
 string selectRandomTask(const vector<string> &taskList)
 {
-    // generate a random number from however big the taskList is
-    int randomNumTask = rand() % taskList.size();
 
-    // return that string task
-    return taskList[randomNumTask];
+    if (taskList.empty())
+    {
+        return "";
+    }
+    else
+    {
+        // generate a random number from however big the taskList is
+        int randomNumTask = rand() % taskList.size();
+
+        // return that string task
+        return taskList[randomNumTask];
+    }
 }
 
 // random item generator
