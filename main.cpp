@@ -64,39 +64,32 @@ void simulateRobotTasks(map<int, string> &robotMap)
     for (int t = 1; t <= SIM_PERIODS; t++)
     {
         cout << "Time Period: " << t << endl;
-        for (auto &robot : robotMap) 
+        for (int r = 1; r <= NUM_ROBOTS; r++)
         {
-            int robotID = robot.first;  // update ID # in the map
-            string task = selectRandomTask();
-
-            // switch statements including logic for each task
-            // picking
-            if (task == "picking")
+            for (auto &robot : robotMap) 
             {
-                // call a random item generator function to assign an item to the task the robot is doing
-                string item = selectRandomItem();
-                // display the robot ID, task, and item
-                cout << "Robot " << robotID << " is " << task << ": " << item << endl;
-            }
+                int robotID = robot.first;  // update ID # in the map
+                string task = selectRandomTask();
 
-            // packing
-            else if (task == "packing")
-            {
-                // call a random item generator function to assign an item to the task the robot is doing
-                string item = selectRandomItem();
-                // display the robot ID, task, and item
-                cout << "Robot " << robotID << " is " << task << ": " << item << endl;
-            }
-        
-            // charging
-            else if (task == "charging")
-            {
-                // display the robot ID and that its charging
-                cout << "Robot " << robotID << " is " << task << endl;
+                // switch statements including logic for each task
+                // picking or packing
+                if (task == "picking" || task == "packing")
+                {
+                    // call a random item generator function to assign an item to the task the robot is doing
+                    string item = selectRandomItem();
+                    // display the robot ID, task, and item
+                    cout << "Robot " << robotID << " is " << task << ": " << item << endl;
+                }       
+                // charging
+                else if (task == "charging")
+                {
+                    // display the robot ID and that its charging
+                    cout << "Robot " << robotID << " is " << task << endl;
 
-            }
-
+                }
+            
             robot.second = task; // update the task in the map
+            }
         }     
     }
 }
