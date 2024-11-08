@@ -15,11 +15,15 @@ using namespace std;
 // function declarations
 int NUM_ROBOTS = 5;
 int SIM_PERIODS = 5;
+
+vector<string> taskList;
+
 // simulation function
-void simulateRobotTasks(map<int, string> &robotMap, const vector<string> &taskList);
-string selectRandomTask(const vector<string> &taskList);
+void simulateRobotTasks(map<int, string> &robotMap);
+string selectRandomTask();
 // ramdom item generator
 string selectRandomItem();
+void loadTasks();
 
 
 // main function
@@ -31,27 +35,10 @@ int main() {
     // initialize a robot map
     map<int, string> robotMap;
 
-    // open external file
-    ifstream finFileOne("tasks.txt");
-
-    // adding data validation to check if there is an error opening the file
-    if (!finFileOne) {
-        cerr << "Error opening the first file." << endl;
-        return 1;
-    }
-
-    // initialize robot task list
-    vector<string> taskList;
-    string task;
-    while (finFileOne >> task) {
-        taskList.push_back(task);
-    }
-
-    // close the file
-    finFileOne.close();
+    loadTasks();
 
     // call function to simulate robot tasks over a certain time period
-    simulateRobotTasks(robotMap, taskList);
+    simulateRobotTasks(robotMap);
 
     // display final state of robots
     cout << "Final State of Robots:\n";
@@ -65,7 +52,7 @@ int main() {
 
 // function definitions
 // simulation function
-void simulateRobotTasks(map<int, string> &robotMap, const vector<string> &taskList)
+void simulateRobotTasks(map<int, string> &robotMap)
 {
     // randomly assign tasks to each robot
     for(int i = 1; i <= NUM_ROBOTS; i++)
@@ -80,7 +67,7 @@ void simulateRobotTasks(map<int, string> &robotMap, const vector<string> &taskLi
         for (auto &robot : robotMap) 
         {
             int robotID = robot.first;  // update ID # in the map
-            string task = selectRandomTask(taskList);
+            string task = selectRandomTask();
 
             // switch statements including logic for each task
             // picking
@@ -89,7 +76,7 @@ void simulateRobotTasks(map<int, string> &robotMap, const vector<string> &taskLi
                 // call a random item generator function to assign an item to the task the robot is doing
                 string item = selectRandomItem();
                 // display the robot ID, task, and item
-                cout << "Robot " << robotID << " is picking: " << item << endl;
+                cout << "Robot " << robotID << " is " << task << ": " << item << endl;
             }
 
             // packing
@@ -98,14 +85,14 @@ void simulateRobotTasks(map<int, string> &robotMap, const vector<string> &taskLi
                 // call a random item generator function to assign an item to the task the robot is doing
                 string item = selectRandomItem();
                 // display the robot ID, task, and item
-                cout << "Robot " << robotID << " is packing: " << item << endl;
+                cout << "Robot " << robotID << " is " << task << ": " << item << endl;
             }
         
             // charging
             else if (task == "charging")
             {
                 // display the robot ID and that its charging
-                cout << "Robot " << robotID << " is charging." << endl;
+                cout << "Robot " << robotID << " is " << task << endl;
 
             }
 
@@ -113,8 +100,30 @@ void simulateRobotTasks(map<int, string> &robotMap, const vector<string> &taskLi
         }     
     }
 }
+
+void loadTasks()
+{
+    // open external file
+    ifstream finFileOne("tasks.txt");
+
+    // adding data validation to check if there is an error opening the file
+    if (!finFileOne) {
+        cerr << "Error opening the first file." << endl;
+        return;
+    }
+
+    // initialize robot task list
+    string task;
+    while (finFileOne >> task) {
+        taskList.push_back(task);
+    }
+
+    // close the file
+    finFileOne.close();
+
+}
     
-string selectRandomTask(const vector<string> &taskList)
+string selectRandomTask()
 {
 
     if (taskList.empty())

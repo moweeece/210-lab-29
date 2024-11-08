@@ -1,3 +1,9 @@
 picking
 placing
 recharging
+picking
+placing
+recharging
+picking
+placing
+recharging
