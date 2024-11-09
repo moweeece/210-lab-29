@@ -16,14 +16,13 @@ using namespace std;
 int NUM_ROBOTS = 5;
 int SIM_PERIODS = 5;
 
-vector<string> taskList;
 
 // simulation function
-void simulateRobotTasks(map<int, string> &robotMap);
-string selectRandomTask();
+void simulateRobotTasks(map<int, string> &robotMap, vector<string> &taskList);
+string selectRandomTask(vector<string> &taskList);
 // ramdom item generator
 string selectRandomItem();
-void loadTasks();
+void loadTasks(vector<string> &taskList);
 
 
 // main function
@@ -34,11 +33,12 @@ int main() {
     // variable declarations
     // initialize a robot map
     map<int, string> robotMap;
+    vector<string> taskList;
 
-    loadTasks();
+    loadTasks(taskList);
 
     // call function to simulate robot tasks over a certain time period
-    simulateRobotTasks(robotMap);
+    simulateRobotTasks(robotMap, taskList);
 
     // display final state of robots
     cout << "Final State of Robots:\n";
@@ -52,7 +52,7 @@ int main() {
 
 // function definitions
 // simulation function
-void simulateRobotTasks(map<int, string> &robotMap)
+void simulateRobotTasks(map<int, string> &robotMap, vector<string> &taskList)
 {
     // randomly assign tasks to each robot
     for(int i = 1; i <= NUM_ROBOTS; i++)
@@ -61,40 +61,46 @@ void simulateRobotTasks(map<int, string> &robotMap)
     }
 
     // for 25 time periods
-    for (int t = 1; t <= SIM_PERIODS; t++)
+    for (int t = 1; t <= SIM_PERIODS; t++) 
     {
         cout << "Time Period: " << t << endl;
-        for (int r = 1; r <= NUM_ROBOTS; r++)
+
+
+        for (auto &robot : robotMap) 
         {
-            for (auto &robot : robotMap) 
+            int robotID = robot.first;  // update ID # in the map
+            string task = selectRandomTask(taskList);
+
+            if(task.empty())
             {
-                int robotID = robot.first;  // update ID # in the map
-                string task = selectRandomTask();
-
-                // switch statements including logic for each task
-                // picking or packing
-                if (task == "picking" || task == "packing")
-                {
-                    // call a random item generator function to assign an item to the task the robot is doing
-                    string item = selectRandomItem();
-                    // display the robot ID, task, and item
-                    cout << "Robot " << robotID << " is " << task << ": " << item << endl;
-                }       
-                // charging
-                else if (task == "charging")
-                {
-                    // display the robot ID and that its charging
-                    cout << "Robot " << robotID << " is " << task << endl;
-
-                }
-            
-            robot.second = task; // update the task in the map
+                task = "charging";
             }
-        }     
+
+            // switch statements including logic for each task
+            // picking or packing
+            if (task == "picking" || task == "packing")
+            {
+                // call a random item generator function to assign an item to the task the robot is doing
+                string item = selectRandomItem();
+                // display the robot ID, task, and item
+                cout << "Robot " << robotID << " is " << task << ": " << item << endl;
+            }       
+            // charging
+            else if (task == "charging")
+            {
+                // display the robot ID and that its charging
+                cout << "Robot " << robotID << " is " << task << endl;
+
+            }
+
+            robot.second = task; // update the task in the map
+            
+        }
+        cout << endl;   
     }
 }
 
-void loadTasks()
+void loadTasks(vector<string> &taskList)
 {
     // open external file
     ifstream finFileOne("tasks.txt");
@@ -116,7 +122,7 @@ void loadTasks()
 
 }
     
-string selectRandomTask()
+string selectRandomTask(vector<string> &taskList)
 {
 
     if (taskList.empty())
