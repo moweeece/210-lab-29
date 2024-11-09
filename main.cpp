@@ -13,8 +13,8 @@ using namespace std;
 
 
 // function declarations
-int NUM_ROBOTS = 5;
-int SIM_PERIODS = 5;
+const int NUM_ROBOTS = 5;
+const int SIM_PERIODS = 5;
 
 
 // simulation function
@@ -54,7 +54,7 @@ int main() {
 // simulation function
 void simulateRobotTasks(map<int, string> &robotMap, vector<string> &taskList)
 {
-    // randomly assign tasks to each robot
+    //randomly assign tasks to each robot
     for(int i = 1; i <= NUM_ROBOTS; i++)
     {
         robotMap[i] = ""; // initially empty
@@ -78,7 +78,7 @@ void simulateRobotTasks(map<int, string> &robotMap, vector<string> &taskList)
 
             // switch statements including logic for each task
             // picking or packing
-            if (task == "picking" || task == "packing")
+            if (task != "charging")
             {
                 // call a random item generator function to assign an item to the task the robot is doing
                 string item = selectRandomItem();
