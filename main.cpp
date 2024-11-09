@@ -14,7 +14,7 @@ using namespace std;
 
 // function declarations
 const int NUM_ROBOTS = 5;
-const int SIM_PERIODS = 5;
+const int SIM_PERIODS = 25;
 
 
 // simulation function
@@ -71,22 +71,23 @@ void simulateRobotTasks(map<int, string> &robotMap, vector<string> &taskList)
             int robotID = robot.first;  // update ID # in the map
             string task = selectRandomTask(taskList);
 
-            if(task.empty())
-            {
-                task = "charging";
-            }
+            //if(task.empty())
+            //{
+            //    task = "charging";
+            //}
 
             // switch statements including logic for each task
             // picking or packing
-            if (task != "charging")
+            if (task != "recharging")
             {
                 // call a random item generator function to assign an item to the task the robot is doing
                 string item = selectRandomItem();
                 // display the robot ID, task, and item
                 cout << "Robot " << robotID << " is " << task << ": " << item << endl;
             }       
+
             // charging
-            else if (task == "charging")
+            else if (task == "recharging")
             {
                 // display the robot ID and that its charging
                 cout << "Robot " << robotID << " is " << task << endl;
